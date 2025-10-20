@@ -2,95 +2,259 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Трекер Привычек</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Трекер Привычек Pro</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <header>
-            <h1>Трекер Привычек</h1>
-            <div class="date-display" id="currentDate"></div>
+            <div class="header-content">
+                <h1>💪 Трекер Привычек</h1>
+                <div class="date-display" id="currentDate"></div>
+                <div class="motivation-quote" id="motivationQuote"></div>
+            </div>
         </header>
 
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="today">Сегодня</button>
+            <button class="nav-tab" data-tab="progress">Прогресс</button>
+            <button class="nav-tab" data-tab="achievements">Достижения</button>
+            <button class="nav-tab" data-tab="stats">Статистика</button>
+        </nav>
+
         <main>
-            <!-- Habit Cards -->
-            <div class="habits-grid">
-                <!-- Overeating Control -->
-                <div class="habit-card" id="overeating-card">
-                    <div class="habit-header">
-                        <h2>Контроль Питания</h2>
-                        <span class="streak" id="overeating-streak">0 дней</span>
+            <!-- Today Tab -->
+            <div class="tab-content active" id="today-tab">
+                <!-- Daily Summary -->
+                <div class="daily-summary">
+                    <div class="summary-card">
+                        <div class="summary-icon">🔥</div>
+                        <div class="summary-info">
+                            <div class="summary-label">Активные серии</div>
+                            <div class="summary-value" id="active-streaks">0</div>
+                        </div>
                     </div>
-                    <div class="habit-content">
-                        <p>Сегодня без переедания?</p>
-                        <button class="btn btn-success" id="overeating-yes">Да</button>
-                        <button class="btn btn-danger" id="overeating-no">Нет</button>
+                    <div class="summary-card">
+                        <div class="summary-icon">✅</div>
+                        <div class="summary-info">
+                            <div class="summary-label">Сегодня</div>
+                            <div class="summary-value" id="today-completed">0/3</div>
+                        </div>
                     </div>
-                    <div class="habit-status" id="overeating-status"></div>
                 </div>
 
-                <!-- Running -->
-                <div class="habit-card" id="running-card">
-                    <div class="habit-header">
-                        <h2>Бег</h2>
-                        <span class="streak" id="running-streak">0 дней</span>
-                    </div>
-                    <div class="habit-content">
-                        <div class="input-group">
-                            <label>Дистанция (км):</label>
-                            <input type="number" id="running-distance" step="0.1" min="0" placeholder="5.0">
+                <!-- Habit Cards -->
+                <div class="habits-container">
+                    <!-- Overeating Control -->
+                    <div class="habit-card" id="overeating-card">
+                        <div class="habit-header">
+                            <div class="habit-title">
+                                <span class="habit-icon">🍽️</span>
+                                <h2>Контроль Питания</h2>
+                            </div>
+                            <span class="streak-badge" id="overeating-streak">
+                                <span class="streak-icon">🔥</span>
+                                <span class="streak-number">0</span>
+                            </span>
                         </div>
-                        <div class="input-group">
-                            <label>Время (мин):</label>
-                            <input type="number" id="running-time" min="0" placeholder="30">
+                        <div class="habit-content">
+                            <p class="habit-question">Сегодня без переедания?</p>
+                            <div class="button-group">
+                                <button class="btn btn-success" id="overeating-yes">
+                                    <span class="btn-icon">✓</span> Да
+                                </button>
+                                <button class="btn btn-danger" id="overeating-no">
+                                    <span class="btn-icon">✗</span> Нет
+                                </button>
+                            </div>
                         </div>
-                        <button class="btn btn-primary" id="running-save">Сохранить</button>
+                        <div class="habit-status" id="overeating-status"></div>
+                        <div class="habit-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="overeating-progress"></div>
+                            </div>
+                            <div class="progress-text" id="overeating-progress-text"></div>
+                        </div>
                     </div>
-                    <div class="habit-status" id="running-status"></div>
-                    <div class="stats" id="running-stats"></div>
-                </div>
 
-                <!-- Cycling -->
-                <div class="habit-card" id="cycling-card">
-                    <div class="habit-header">
-                        <h2>Велосипед</h2>
-                        <span class="streak" id="cycling-streak">0 дней</span>
-                    </div>
-                    <div class="habit-content">
-                        <div class="input-group">
-                            <label>Дистанция (км):</label>
-                            <input type="number" id="cycling-distance" step="0.1" min="0" placeholder="10.0">
+                    <!-- Running -->
+                    <div class="habit-card" id="running-card">
+                        <div class="habit-header">
+                            <div class="habit-title">
+                                <span class="habit-icon">🏃</span>
+                                <h2>Бег</h2>
+                            </div>
+                            <span class="streak-badge" id="running-streak">
+                                <span class="streak-icon">🔥</span>
+                                <span class="streak-number">0</span>
+                            </span>
                         </div>
-                        <div class="input-group">
-                            <label>Время (мин):</label>
-                            <input type="number" id="cycling-time" min="0" placeholder="40">
+                        <div class="habit-content">
+                            <div class="input-row">
+                                <div class="input-group">
+                                    <label>Дистанция (км)</label>
+                                    <input type="number" id="running-distance" step="0.1" min="0" placeholder="5.0">
+                                </div>
+                                <div class="input-group">
+                                    <label>Время (мин)</label>
+                                    <input type="number" id="running-time" min="0" placeholder="30">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-block" id="running-save">
+                                <span class="btn-icon">💾</span> Сохранить тренировку
+                            </button>
                         </div>
-                        <button class="btn btn-primary" id="cycling-save">Сохранить</button>
+                        <div class="habit-status" id="running-status"></div>
+                        <div class="metrics-grid" id="running-metrics"></div>
+                        <div class="habit-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="running-progress"></div>
+                            </div>
+                            <div class="progress-text" id="running-progress-text"></div>
+                        </div>
                     </div>
-                    <div class="habit-status" id="cycling-status"></div>
-                    <div class="stats" id="cycling-stats"></div>
+
+                    <!-- Cycling -->
+                    <div class="habit-card" id="cycling-card">
+                        <div class="habit-header">
+                            <div class="habit-title">
+                                <span class="habit-icon">🚴</span>
+                                <h2>Велосипед</h2>
+                            </div>
+                            <span class="streak-badge" id="cycling-streak">
+                                <span class="streak-icon">🔥</span>
+                                <span class="streak-number">0</span>
+                            </span>
+                        </div>
+                        <div class="habit-content">
+                            <div class="input-row">
+                                <div class="input-group">
+                                    <label>Дистанция (км)</label>
+                                    <input type="number" id="cycling-distance" step="0.1" min="0" placeholder="10.0">
+                                </div>
+                                <div class="input-group">
+                                    <label>Время (мин)</label>
+                                    <input type="number" id="cycling-time" min="0" placeholder="40">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-block" id="cycling-save">
+                                <span class="btn-icon">💾</span> Сохранить тренировку
+                            </button>
+                        </div>
+                        <div class="habit-status" id="cycling-status"></div>
+                        <div class="metrics-grid" id="cycling-metrics"></div>
+                        <div class="habit-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="cycling-progress"></div>
+                            </div>
+                            <div class="progress-text" id="cycling-progress-text"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Weekly Calendar -->
-            <div class="calendar-section">
-                <h2>История Последних 7 Дней</h2>
-                <div class="calendar" id="calendar"></div>
+            <!-- Progress Tab -->
+            <div class="tab-content" id="progress-tab">
+                <div class="section-header">
+                    <h2>📈 Ваш Прогресс</h2>
+                </div>
+
+                <!-- Weekly Calendar -->
+                <div class="calendar-section">
+                    <h3>Последние 7 дней</h3>
+                    <div class="calendar" id="calendar"></div>
+                </div>
+
+                <!-- Progress Charts -->
+                <div class="charts-section">
+                    <div class="chart-card">
+                        <h3>🏃 Прогресс в беге</h3>
+                        <div class="chart-container" id="running-chart"></div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>🚴 Прогресс на велосипеде</h3>
+                        <div class="chart-container" id="cycling-chart"></div>
+                    </div>
+                </div>
+
+                <!-- Personal Records -->
+                <div class="records-section">
+                    <h3>🏆 Личные рекорды</h3>
+                    <div class="records-grid" id="personal-records"></div>
+                </div>
             </div>
 
-            <!-- Monthly Statistics -->
-            <div class="statistics-section">
-                <h2>Статистика За Месяц</h2>
-                <div class="stats-grid" id="monthly-stats"></div>
+            <!-- Achievements Tab -->
+            <div class="tab-content" id="achievements-tab">
+                <div class="section-header">
+                    <h2>🏆 Достижения</h2>
+                    <div class="achievements-progress">
+                        <span id="achievements-earned">0</span> из <span id="achievements-total">0</span> получено
+                    </div>
+                </div>
+                <div class="achievements-grid" id="achievements-list"></div>
+            </div>
+
+            <!-- Stats Tab -->
+            <div class="tab-content" id="stats-tab">
+                <div class="section-header">
+                    <h2>📊 Статистика</h2>
+                </div>
+
+                <!-- Time Period Selector -->
+                <div class="period-selector">
+                    <button class="period-btn active" data-period="week">Неделя</button>
+                    <button class="period-btn" data-period="month">Месяц</button>
+                    <button class="period-btn" data-period="all">Все время</button>
+                </div>
+
+                <!-- Statistics Grid -->
+                <div class="stats-grid" id="statistics-grid"></div>
+
+                <!-- Detailed Stats -->
+                <div class="detailed-stats">
+                    <div class="stat-section">
+                        <h3>🍽️ Питание</h3>
+                        <div class="stat-details" id="eating-details"></div>
+                    </div>
+                    <div class="stat-section">
+                        <h3>🏃 Бег</h3>
+                        <div class="stat-details" id="running-details"></div>
+                    </div>
+                    <div class="stat-section">
+                        <h3>🚴 Велосипед</h3>
+                        <div class="stat-details" id="cycling-details"></div>
+                    </div>
+                </div>
             </div>
         </main>
 
+        <!-- Footer -->
         <footer>
-            <button class="btn btn-secondary" id="export-data">Экспорт Данных</button>
-            <button class="btn btn-secondary" id="import-data">Импорт Данных</button>
+            <div class="footer-actions">
+                <button class="btn btn-secondary" id="export-data">
+                    <span class="btn-icon">📤</span> Экспорт
+                </button>
+                <button class="btn btn-secondary" id="import-data">
+                    <span class="btn-icon">📥</span> Импорт
+                </button>
+            </div>
             <input type="file" id="file-input" accept=".json" style="display: none;">
         </footer>
+    </div>
+
+    <!-- Achievement Popup -->
+    <div class="achievement-popup" id="achievement-popup">
+        <div class="achievement-popup-content">
+            <div class="achievement-popup-icon">🏆</div>
+            <div class="achievement-popup-title"></div>
+            <div class="achievement-popup-desc"></div>
+        </div>
     </div>
 
     <script src="app.js"></script>
