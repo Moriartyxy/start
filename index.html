@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Трекер Привычек</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Трекер Привычек</h1>
+            <div class="date-display" id="currentDate"></div>
+        </header>
+
+        <main>
+            <!-- Habit Cards -->
+            <div class="habits-grid">
+                <!-- Overeating Control -->
+                <div class="habit-card" id="overeating-card">
+                    <div class="habit-header">
+                        <h2>Контроль Питания</h2>
+                        <span class="streak" id="overeating-streak">0 дней</span>
+                    </div>
+                    <div class="habit-content">
+                        <p>Сегодня без переедания?</p>
+                        <button class="btn btn-success" id="overeating-yes">Да</button>
+                        <button class="btn btn-danger" id="overeating-no">Нет</button>
+                    </div>
+                    <div class="habit-status" id="overeating-status"></div>
+                </div>
+
+                <!-- Running -->
+                <div class="habit-card" id="running-card">
+                    <div class="habit-header">
+                        <h2>Бег</h2>
+                        <span class="streak" id="running-streak">0 дней</span>
+                    </div>
+                    <div class="habit-content">
+                        <div class="input-group">
+                            <label>Дистанция (км):</label>
+                            <input type="number" id="running-distance" step="0.1" min="0" placeholder="5.0">
+                        </div>
+                        <div class="input-group">
+                            <label>Время (мин):</label>
+                            <input type="number" id="running-time" min="0" placeholder="30">
+                        </div>
+                        <button class="btn btn-primary" id="running-save">Сохранить</button>
+                    </div>
+                    <div class="habit-status" id="running-status"></div>
+                    <div class="stats" id="running-stats"></div>
+                </div>
+
+                <!-- Cycling -->
+                <div class="habit-card" id="cycling-card">
+                    <div class="habit-header">
+                        <h2>Велосипед</h2>
+                        <span class="streak" id="cycling-streak">0 дней</span>
+                    </div>
+                    <div class="habit-content">
+                        <div class="input-group">
+                            <label>Дистанция (км):</label>
+                            <input type="number" id="cycling-distance" step="0.1" min="0" placeholder="10.0">
+                        </div>
+                        <div class="input-group">
+                            <label>Время (мин):</label>
+                            <input type="number" id="cycling-time" min="0" placeholder="40">
+                        </div>
+                        <button class="btn btn-primary" id="cycling-save">Сохранить</button>
+                    </div>
+                    <div class="habit-status" id="cycling-status"></div>
+                    <div class="stats" id="cycling-stats"></div>
+                </div>
+            </div>
+
+            <!-- Weekly Calendar -->
+            <div class="calendar-section">
+                <h2>История Последних 7 Дней</h2>
+                <div class="calendar" id="calendar"></div>
+            </div>
+
+            <!-- Monthly Statistics -->
+            <div class="statistics-section">
+                <h2>Статистика За Месяц</h2>
+                <div class="stats-grid" id="monthly-stats"></div>
+            </div>
+        </main>
+
+        <footer>
+            <button class="btn btn-secondary" id="export-data">Экспорт Данных</button>
+            <button class="btn btn-secondary" id="import-data">Импорт Данных</button>
+            <input type="file" id="file-input" accept=".json" style="display: none;">
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
